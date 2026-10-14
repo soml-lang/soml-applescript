@@ -1,0 +1,29 @@
+name: Release
+# Run it from the Actions tab after the version bump is pushed to `main`, or with `gh workflow run release.yml`. It releases the version in `source/Info.plist`, pushes its `v` tag, and attaches the compiled library to the GitHub release.
+on: workflow_dispatch
+jobs:
+  release:
+    # The build uses the `trash` command, which needs macOS 15 or later.
+    runs-on: macos-latest
+    timeout-minutes: 20
+    # A release from any other branch would tag a commit that is not on `main`.
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      # For pushing the tag and creating the release.
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+      - run: make test
+      # `ditto` keeps the bundle intact. The file name has no version, so `releases/latest/download/SOML.scptd.zip` always links the latest one.
+      - run: ditto -c -k --keepParent build/SOML.scptd SOML.scptd.zip
+      - name: Tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="v$(plutil -extract CFBundleShortVersionString raw source/Info.plist)"
+          git tag "$version"
+          git push origin "$version"
+          gh release create "$version" --generate-notes SOML.scptd.zip

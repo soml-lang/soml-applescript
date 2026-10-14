@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="SOML Terminology">
+	<suite name="SOML" code="SOML" description="The SOML values that AppleScript has no class for. Each is a record with this class and either a value or object entries.">
+		<value-type name="SOML int" code="SOMi" description="An int outside AppleScript's integer range (-536870912 to 536870911), as {class:SOML int, value:&quot;9007199254740993&quot;}."/>
+		<value-type name="SOML date" code="SOMc" description="A proleptic Gregorian calendar date, as {class:SOML date, value:&quot;2027-09-19&quot;}, with no time or timezone."/>
+		<value-type name="SOML instant" code="SOMt" description="An instant, as {class:SOML instant, value:&quot;2026-09-19T12:00:00Z&quot;}, in UTC."/>
+		<value-type name="SOML duration" code="SOMd" description="A duration, as {class:SOML duration, value:&quot;1h30m&quot;}."/>
+		<value-type name="SOML object" code="SOMo" description="An object that a record cannot hold exactly, as {class:SOML object, entries:{{key, value}, …}}: an empty one, one with keys that differ only in ASCII letter case or that AppleScript spells differently, and those of a document with very many keys or with a text that starts with U+FEFF or U+FFFE."/>
+	</suite>
+</dictionary>
