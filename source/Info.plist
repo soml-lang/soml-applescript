@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>SOML</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.0</string>
+	<string>0.0.1</string>
 	<key>OSAScriptingDefinition</key>
 	<string>SOML</string>
 </dict>
